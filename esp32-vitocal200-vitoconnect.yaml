@@ -1,0 +1,121 @@
+external_components:
+  - source: github://idstein/esphome-optolink
+
+uart:
+ - id: vitoconnectOpto2
+   tx_pin: GPIO1
+   rx_pin: GPIO3
+   baud_rate: 4800
+   data_bits: 8
+   parity: EVEN
+   stop_bits: 2
+ - id: vitocal200S
+   tx_pin: GPIO17
+   rx_pin: GPIO16
+   baud_rate: 4800
+   data_bits: 8
+   parity: EVEN
+   stop_bits: 2
+
+optolink:
+  id: optoVitoCal200S
+  uart_id: vitocal200S
+  uart_vitoconnect_id: vitoconnectOpto2
+  sensors:
+    - id: CU401B_S_01C1
+      name: "Außentemperatur"
+      device_class: "temperature"
+      state_class: "measurement"
+      unit_of_measurement: "°C"
+      accuracy_decimals: 1
+      address: 0x01C1
+      lambda: return static_cast<short>((x[1] << 8) + x[0]) / 10.0;
+    - id: CU401B_S_01CB
+      name: "Heizwasser-Pufferspeichertemperatur"
+      device_class: "temperature"
+      state_class: "measurement"
+      unit_of_measurement: "°C"
+      accuracy_decimals: 1
+      address: 0x01CB
+      lambda: return static_cast<short>((x[1] << 8) + x[0]) / 10.0;
+    - id: CU401B_S_01CD
+      name: "WW Temperatur Oben"
+      device_class: "temperature"
+      state_class: "measurement"
+      unit_of_measurement: "°C"
+      accuracy_decimals: 1
+      address: 0x01CD
+      lambda: return static_cast<short>((x[1] << 8) + x[0]) / 10.0;
+    - id: CU401B_S_01C5
+      name: "Vorlauftemperatur Sekundär"
+      device_class: "temperature"
+      state_class: "measurement"
+      unit_of_measurement: "°C"
+      accuracy_decimals: 1
+      address: 0x01C5
+      lambda: return static_cast<short>((x[1] << 8) + x[0]) / 10.0;
+    - id: CU401B_S_01C6
+      name: "Rücklauftemperatur Sekundär"
+      device_class: "temperature"
+      state_class: "measurement"
+      unit_of_measurement: "°C"
+      accuracy_decimals: 1
+      address: 0x01C6
+      lambda: return static_cast<short>((x[1] << 8) + x[0]) / 10.0;
+    - id: CU401B_S_B404
+      name: "Flüßiggastemperatur"
+      device_class: "temperature"
+      state_class: "measurement"
+      unit_of_measurement: "°C"
+      accuracy_decimals: 1
+      address: 0xB404
+      lambda: return static_cast<short>((x[1] << 8) + x[0]) / 10.0;
+    - id: CU401B_S_B40A
+      name: "Heißgastemperatur"
+      device_class: "temperature"
+      state_class: "measurement"
+      unit_of_measurement: "°C"
+      accuracy_decimals: 1
+      address: 0xB40A
+      lambda: return static_cast<short>((x[1] << 8) + x[0]) / 10.0;
+    - id: CU401B_S_1620
+      name: "Verdichter Belastungsklasse 1"
+      device_class: "duration"
+      state_class: "total_increasing"
+      unit_of_measurement: "h"
+      accuracy_decimals: 0
+      address: 0x1620
+      lambda: return ((x[1] << 8) + x[0]);
+    - id: CU401B_S_1622
+      name: "Verdichter Belastungsklasse 2"
+      device_class: "duration"
+      state_class: "total_increasing"
+      unit_of_measurement: "h"
+      accuracy_decimals: 0
+      address: 0x1622
+      lambda: return ((x[1] << 8) + x[0]);
+    - id: CU401B_S_1624
+      name: "Verdichter Belastungsklasse 3"
+      device_class: "duration"
+      state_class: "total_increasing"
+      unit_of_measurement: "h"
+      accuracy_decimals: 0
+      address: 0x1624
+      lambda: return ((x[1] << 8) + x[0]);
+    - id: CU401B_S_1626
+      name: "Verdichter Belastungsklasse 4"
+      device_class: "duration"
+      state_class: "total_increasing"
+      unit_of_measurement: "h"
+      accuracy_decimals: 0
+      address: 0x1626
+      lambda: return ((x[1] << 8) + x[0]);
+    - id: CU401B_S_1628
+      name: "Verdichter Belastungsklasse 5"
+      device_class: "duration"
+      state_class: "total_increasing"
+      unit_of_measurement: "h"
+      accuracy_decimals: 0
+      address: 0x1628
+      lambda: return ((x[1] << 8) + x[0]);
+    
